@@ -1,0 +1,120 @@
+1.	Explain the concepts of scaling up and scaling out with server resources.
+Scaling up or scaling out are both techniques for increasing the capabilities of your IT infrastructure. This increase in processing power or storage is made to meet the demands of customers or workers within a company. 
+With scaling up, a company will buy a more powerful machine with better hardware (more CPUs, better CPUs, more storage, …). These components are typically expensive and will require expertise on how to install and maintain the hardware. 
+With scaling out, a company will focus on purchasing new machines to meet demand. Collectively, many machines will provide the same processing and storage needs of a few powerful servers.
+2.	Name four properties of cloud environments.
+Computing as a utility – Cloud customers are billed only for what they use in the cloud. If they use more resources, they pay more money for those resources. If they use less, they pay less.
+On demand computing power or storage – Cloud customers can request cloud resources as needed.
+Elasticity – Cloud resources can be scaled up or down in a response to a companies need. This can happen rapidly in response to the needs of the company.
+Vast resources – Cloud platforms provide (essentially) endless computing and storage resources to a company.
+Self-service provisioning: Users can provision computing resources without the need for direct intervention from the service provider. 
+Pay-per use: charges are based on computing resources consumed or a subscription model. 
+3.	Give an example of elasticity in cloud environments. Why is this an important feature for companies who deploy software in the cloud?
+A start-up company sees rapid growth with their products. The website that sells their product sees an increase in traffic. Depending on the deployment pattern, cloud resources are increased to handle the new demand for the product (to respond to the increase in traffic to the website). If, for example, later on the website experiences a decrease in traffic, the company can quickly scale 
+down the cloud resources they are using to provide access to the website.
+4.	What are the acronyms IAAS, PAAS and SAAS short for?
+IAAS – Infrastructure as a service | PAAS – Platform as a service | SAAS – Software as a service
+5.	Compare and contrast the parts of the software stack a development team is responsible for under IAAS, PAAS, and SAAS.
+IAAS – The developer must provide OS, runtime tools, and the application. The cloud handles virtualization and hardware.
+PAAS – The developer must provide the application. The cloud handles, OS, runtime tools, virtualization and hardware.
+SAAS – The cloud handles the application, OS, runtime tools, virtualization and hardware.
+6.	We used the Compute Engine, App Engine, and Kubernetes Engine features in the Google Cloud Platform. Categorize each of these features as IAAS, PAAS or SAAS.
+Compute Engine is IAAS | App Engine is PAAS | Kubernetes is PAAS
+Use case: Use Case and Complexity: Compute Engine is suited for custom, possibly legacy applications requiring specific VM configurations. App Engine is designed for web applications and mobile backends that benefit from automatic scaling and simplified deployment processes. Kubernetes Engine is tailored for applications that use containers, especially those adopting microservices architecture, requiring scalability and flexibility in deployment and management
+7.	Explain the following steps of deploying a Java application in a virtual machine:
+a.	Converting your application into a JAR file.
+You will need to run the Maven or Gradle build step to package your application as a JAR file. The JAR file will then be located in a “target”, “build” or “output” folder.
+b.	Running a command on the Linux terminal to start the application process.
+java -jar <jar-name>
+c.	Running the application as a background process.
+java -jar <jar-name> &
+8.	We deployed applications in containers this quarter. What is the difference between Docker images and Docker containers?
+An image is a file that contains all necessary application files and OS files to run an application. Images are then deployed in containers which provide an isolated environment for the application to run. Containers have states (stopped, started, paused, …) and are considered lightweight environments for deploying applications.
+9.	Give the Docker commands to do the following:
+a.	Show all Docker images. docker images
+b.	Show all running Docker containers. ps -a Start or stop a Docker container. docker start|stop <container-id> Delete a Docker container. docker rm <container-id>
+c.	Create a new Docker image. docker build -t <author>/<app> <directory>  Send a Docker image to Docker hub. docker image push <image-id>
+d.	docker run: Create and start a container from an image. docker start: Start one or more stopped containers. docker stop: Stop one or more running containers.docker restart: Restart a container
+e.	docker pause: Pause all processes within a container. docker unpause: Unpause all processes within a container. docker rm: Remove one or more containers. docker create: Create a new container but do not start it.
+f.	docker exec: Run a command in a running container. docker kill: Kill one or more running containers (sends a SIGKILL). docker attach: Attach local standard input, output, and error streams to a running container.
+g.	docker build: Build an image from a Dockerfile. docker pull: Pull an image or a repository from a registry.docker push: Push an image or a repository to a registry. docker images: List images.
+h.	docker rmi: Remove one or more images. docker tag: Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE. docker import: Import the contents from a tarball to create a filesystem image. docker commit: Create a new image from a container's changes. docker network create: Create a network. docker network rm: Remove one or more networks. docker network ls: List networks.
+docker network inspect: Display detailed information on one or more networks. docker network connect: Connect a container to a network. docker network disconnect: Disconnect a container from a network. docker volume create: Create a volume. docker volume rm: Remove one or more volumes. docker volume ls: List volumes. docker volume inspect: Display detailed information on one or more volumes.
+docker-compose up: Build, (re)create, start, and attach to containers for a service. docker-compose down: Stop and remove containers, networks, images, and volumes. docker-compose build: Build or rebuild services.
+docker-compose logs: View output from containers. docker-compose stop: Stop services. docker-compose start: Start services. docker-compose restart: Restart services.
+10.	What is the difference between a Node and a Pod in a Kubernetes cluster?
+A Node is a machine that can run processes in a Kubernetes cluster. A pod is a small operational unit in the cluster. Applications are ran within a pod, which itself has one (or more) containers running internally. 
+11.	What are the properties of a Kubernetes Deployment object?
+Deployments provide the configuration for a software installation on a group of pods in Kubernetes. They determine how many pods are created, provide self-healing if a pod fails (a new pod is created), and provide rules for rolling out software updates to pods.
+12.	Explain how a load balancer works. 
+A load balancer is a software program that routes requests to resources in a network. From our examples in class, the load balancer was passing HTTP requests to different pods in a Kubernetes cluster. Each pod had a container running the same software image and can individually handle the request they are sent.
+13.	Is a load balancer a feature of a cloud platform or an object declared inside a Kubernetes cluster?
+It is both. A LoadBalancer is a Kubernetes object that is registered and tracked by the Control-Plane in the cluster. Yet the Kubernetes object works with the load-balancer provided by the cloud platform.
+14.	Which of the following models can you use to declare Kubernetes objects? Both.
+a.	Declarative (through manifest files)
+b.	Imperative (through terminal commands) kubectl apply -f <file or directory>: Apply a configuration to a resource from a file or directory. kubectl delete -f <file>: Delete resources defined in a file. kubectl diff -f <file>: Preview changes without applying them.
+c.	Imperative Model: give k8 direct steps to perform specific actions. Declarative: you declare the desired state of resources w/ manifest files. Gr8 for version control, automation(ci/cd piplelines) 
+15.	Give a Kubernetes command to do the following:
+a.	View all active nodes. kubectl get nodes (b.) View all active pods. kubectl get pods (c.) Send a manifest file to the Kubernetes api server. kubectl apply -f <manifest-file>
+(d). Remove all changes in a manifest file from a Kubernetes cluster. kubectl delete -f <manifest-file>
+16.	True or false – Images deployed in Kubernetes containers can be pulled directly from Docker images on Docker Hub. True.
+17.	Explain how the reconciliation loop works in a Kubernetes cluster.
+The reconciliation loop is a background process in the Control-Plane of a Kubernetes cluster that tracks the actual (observed) state of the cluster and the user-declared state. The reconciliation loop will make changes to the cluster to move the actual state to the user-declare state, adding/removing pods or other resources until they are the same.
+18.	Kubernetes commandsManaging Resources
+kubectl apply: Apply a configuration to a resource by filename or stdin. This command creates or updates resources in a cluster through declarative configuration files.
+kubectl create: Create a resource from a file or from stdin. kubectl delete: Delete resources by filenames, stdin, resources and names, or by resources and label selector.
+kubectl get: Display one or more resources. kubectl describe: Show detailed information about a specific resource or group of resources.
+kubectl edit: Edit a resource on the server. kubectl replace: Replace a resource by filename or stdin.
+Managing Deployments
+kubectl rollout: Manage the rollout of a resource (e.g., deployments). Subcommands include status, history, undo, pause, and resume. kubectl scale: Set a new size for a Deployment, ReplicaSet, Replication Controller, or StatefulSet. kubectl autoscale: Automatically scale the set of pods that are managed by a Deployment or ReplicaSet.
+Cluster Management kubectl cluster-info: Display cluster info. kubectl top: Display resource (CPU/memory) usage. kubectl cordon: Mark node as unschedulable. kubectl uncordon: Mark node as schedulable.
+kubectl drain: Drain node in preparation for maintenance.
+Debugging and Diagnostics
+kubectl logs: Print the logs for a container in a pod. kubectl exec: Execute a command in a container. kubectl attach: Attach to a running container. kubectl port-forward: Forward one or more local ports to a pod. kubectl proxy: Run a proxy to the Kubernetes API server.
+Configuration and Access
+kubectl config: Modify kubeconfig files. Subcommands include view, set, get-contexts, and use-context. kubectl auth: Inspect authorization.
+Working with Manifests and Configuration Files
+kubectl diff: Diff live version against would-be applied version. kubectl apply -f <filename or directory>: Apply the configuration in <filename or directory>.
+Helpful Commands: kubectl help: Help about any command. kubectl version: Display the Kubernetes version.
+Software Testing
+1.	Give three examples of functional tests.
+Verifying that a method has the correct return type for a given input.
+Verifying that a method throws an exception in a given circumstance.
+Verifying that when a user signs up for a new account, that the password they enter must follow a set of rules (8+ characters, special symbols, upper/lower-case, etc…).
+2.	Give three examples of non-functional tests.
+Ensuring that all pages in a website load under 200ms.
+Ensuring that a page is straightforward for new users. This would be done through a usability test.
+Testing whether the data in an application is HIPAA compliant or not.
+3.	Explain the difference between verification of software and validation of software. 
+Verification is the process of determining if we built an application right. i.e. “Do the web pages work? Can I log in? Etc.”
+Validation is the process of determining if we built the right application. i.e. “Was this what our stakeholders wanted?”
+4.	With each of the following testing categories, describe what is the focus for verifying the behavior of a software artifact:
+a.	Unit testing – The focus is on small executable parts of our application. For example, methods or small code segments.
+b.	Integration testing – The focus is on modules or groups of units working together. For example, can I place an order through my order module?
+c.	System testing – The entire software system is tested, bring together the different modules, classes, and methods the team created.
+d.	Acceptance testing – The software is tested to see if it complies with the requirements of the software. This will often involve users or stakeholders.
+5.	Does the order in which you declare tests in JUnit 5 determine the order in which they run?
+No. You should use @BeforeEach, @BeforeAll, @AfterEach, @AfterAll to create a reliable environment in which your tests run.
+6.	What annotations are used with repeated and parameterized tests in JUnit 5?
+@RepeatedTest
+@ParameteredTest & @ValueSource
+7.	Give an example situation where you might use a repeated or parameterized tests.
+Parameterized tests are good for boundary testing.
+Repeated tests are good for stress testing or code segments that involve randomness.
+8.	True or false - It is preferable to exhaustively test all possible inputs to a problem.
+No. It is better to break up your inputs into equivalence classes and to test a single value from each class.
+9.	What classes did we use to declare integration tests on our RESTful endpoints? Note: We used at least four classes.
+TestRestTemplate | HttpEntity | HttpHeaders | ResponseEntity
+ur classes Code Coverage: a metric used to test the health of a software system. (percentage of lines of code in a project that are validated through a software test. 
+Software Testing Tools
+1.	What is CI/CD?
+CI/CD is short for Continous integration and deployment. CI tools are used to support rapid and regular introduction of changes into a software system. Tests are typically automated and verify that new changes will run correctly in the system. CD adds to this automation by moving code from testing environments to 
+2.	What are the benefits of CI?
+•	It reduces human error when committing code to a VCS. | It increases the stability of a code base by continously integrating changes. | Testing is handled in an automated fashion.
+3.	Explain the steps of the CI process and how changes are more quickly integrated into a code base.
+Step #1 – make changes to project code | Step #2 – commit changes to local VCS repository | Step #3 – push changes to remote VCS repository, triggering CI processes | Step #4 – tests are automated to verify that changes do not break the project code (make sure to pull and merge  the configuration file)
+ 
+
+
+
+
